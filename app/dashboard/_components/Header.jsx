@@ -1,3 +1,25 @@
+// "use client"
+// import { UserButton } from '@clerk/nextjs'
+// import Image from 'next/image'
+// import { usePathname } from 'next/navigation'
+// import React, { useEffect } from 'react'
+
+// export const Header = () => {
+//     const path=usePathname()
+//     useEffect(()=>{
+//         console.log(path);
+//     })
+//   return (
+//     <div className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
+//         <Image src={'/logo.svg'} alt='logo' width={90} height={90}     />
+//         <ul className='hidden md:flex gap-6'>
+//             <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${path=='/dashboard' && 'text-primary font-bold'}`}>Dashboard</li>
+        
+//         </ul>
+//         <UserButton/>
+//     </div>
+//   )
+// }
 "use client"
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
@@ -5,18 +27,30 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 export const Header = () => {
-    const path=usePathname()
-    useEffect(()=>{
-        console.log(path);
-    })
+  const path = usePathname()
+
+  useEffect(() => {
+    console.log(path)
+  }, [path]) // add dependency to avoid infinite logs
+
   return (
     <div className='flex p-4 items-center justify-between bg-secondary shadow-sm'>
-        <Image src={'/logo.svg'} alt='logo' width={90} height={90}     />
-        <ul className='hidden md:flex gap-6'>
-            <li className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${path=='/dashboard' && 'text-primary font-bold'}`}>Dashboard</li>
-        
-        </ul>
-        <UserButton/>
+      <Image src={'/logo.svg'} alt='logo' width={90} height={90} />
+      <ul className='hidden md:flex gap-6'>
+        <li>
+          <a
+            href='https://saarthi-pr-201.vercel.app/Main'
+            target=''
+            rel='noopener noreferrer'
+            className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
+              path === '/dashboard' ? 'text-primary font-bold' : ''
+            }`}
+          >
+            Dashboard
+          </a>
+        </li>
+      </ul>
+      <UserButton />
     </div>
   )
 }
